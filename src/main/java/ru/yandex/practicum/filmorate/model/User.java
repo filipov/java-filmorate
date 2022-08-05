@@ -1,7 +1,7 @@
-package model;
+package ru.yandex.practicum.filmorate.model;
 
 import java.time.LocalDate;
-import java.util.Objects;
+
 import lombok.*;
 
 @Data
@@ -14,7 +14,7 @@ public class User {
     private String name;
     private LocalDate birthdate;
 
-    public static getNewId() {
+    public static int getNewId() {
         lastId++;
 
         return lastId;

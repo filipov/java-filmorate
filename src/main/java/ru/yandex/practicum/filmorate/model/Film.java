@@ -1,7 +1,8 @@
-package model;
+package ru.yandex.practicum.filmorate.model;
 
+import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Objects;
+
 import lombok.*;
 
 @Data
@@ -14,7 +15,7 @@ public class Film {
     private LocalDate releaseDate;
     private Duration duration;
 
-    public static getNewId() {
+    public static int getNewId() {
         lastId++;
 
         return lastId;
