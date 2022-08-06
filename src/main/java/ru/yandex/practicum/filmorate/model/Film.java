@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 
 @Data
 public class Film extends Model {
-    @NotEmpty
+
     @NotBlank
     private String name;
     @Size(max=200)
@@ -20,4 +20,11 @@ public class Film extends Model {
     private LocalDate releaseDate;
     @Positive
     private int duration;
+
+    public Film(String name, String description, LocalDate releaseDate, int duration) {
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+    }
 }

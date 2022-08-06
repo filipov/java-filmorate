@@ -15,6 +15,7 @@ public class User extends Model {
     private static final String PATTERN_REGEXP = "^[\\S]+$";
 
     @Email
+    @NotEmpty
     private final String email;
     @NotEmpty
     @Pattern(regexp = PATTERN_REGEXP)
