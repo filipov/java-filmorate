@@ -2,37 +2,37 @@ package ru.yandex.practicum.filmorate.controller;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+import ru.yandex.practicum.filmorate.exception.ResourceNotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.utils.Store;
+
+import javax.validation.Valid;
 
 @RestController()
 @RequestMapping("/films")
 public class FilmController {
-    private final HashMap<Integer, Film> films = new HashMap<>();
+    private final Store<Film> films = new Store<>();
 
     @GetMapping
     public List<Film> findAll() {
-        return new ArrayList<>(films.values());
+        return films.getList();
     }
 
     @PostMapping
-    public Film create(@RequestBody Film film) {
-        film.setId(Film.getNewId());
-
-        films.put(film.getId(), film);
-
-        return film;
+    public Film create(@Valid @RequestBody Film film) {
+        return films.add(film);
     }
 
     @PutMapping
-    public Film update(@RequestBody Film film) {
-        if (films.containsKey(film.getId())) {
-            films.put(film.getId(), film);
+    public Film update(@Valid @RequestBody Film film) {
+        Film updatedFilm = films.update(film);
+
+        if (updatedFilm == null) {
+            throw new ResourceNotFoundException();
         }
 
-        return film;
+        return films.update(film);
     }
 }

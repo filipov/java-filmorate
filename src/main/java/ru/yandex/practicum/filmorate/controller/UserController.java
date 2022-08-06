@@ -1,35 +1,36 @@
 package ru.yandex.practicum.filmorate.controller;
 
 import org.springframework.web.bind.annotation.*;
+import ru.yandex.practicum.filmorate.exception.ResourceNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.utils.Store;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController()
 @RequestMapping("/users")
 public class UserController {
-    private final HashMap<Integer, User> users = new HashMap<>();
+    private final Store<User> users = new Store<>();
 
     @GetMapping
     public List<User> findAll() {
-        return new ArrayList<>(users.values());
+        return users.getList();
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        user.setId(User.getNewId());
-
-        users.put(user.getId(), user);
-
-        return user;
+    public User create(@Valid @RequestBody User user) {
+        return users.add(user);
     }
 
     @PutMapping
-    public User update(@RequestBody User user) {
-        users.put(user.getId(), user);
+    public User update(@Valid @RequestBody User user) {
+        User updatedUser = users.update(user);
 
-        return user;
+        if (updatedUser == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        return users.update(user);
     }
 }
