@@ -42,6 +42,6 @@ public class UserController {
             throw new ResourceNotFoundException();
         }
 
-        return users.update(user);
+        return updatedUser;
     }
 }
