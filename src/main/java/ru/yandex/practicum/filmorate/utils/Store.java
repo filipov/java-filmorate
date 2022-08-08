@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Store<T extends Model> {
-    private static int lastId = 0;
+    private int lastId = 0;
 
     private final HashMap<Integer, T> state = new HashMap<>();
 
