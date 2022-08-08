@@ -43,6 +43,6 @@ public class FilmController {
             throw new ResourceNotFoundException();
         }
 
-        return films.update(film);
+        return updatedFilm;
     }
 }
