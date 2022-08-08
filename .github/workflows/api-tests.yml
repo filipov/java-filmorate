@@ -2,7 +2,6 @@ name: Films API Tests
 
 on:
   pull_request:
-  push:
 
 jobs:
   build:
