@@ -21,6 +21,14 @@ public class Store<T extends Model> implements Storage<T>{
         return new ArrayList<>(state.values());
     }
 
+    public T get(Integer id) {
+        T item = state.get(id);
+
+        log.debug("Найден элемент: {}", item);
+
+        return item;
+    }
+
     public T add(T newItem) {
         newItem.setId(newId());
 
