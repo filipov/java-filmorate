@@ -10,6 +10,7 @@ import ru.yandex.practicum.filmorate.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController()
 @RequestMapping("/users")
@@ -28,6 +29,40 @@ public class UserController {
         log.info("Получен запрос GET /users");
 
         return userService.findAll();
+    }
+    @GetMapping("/{id}")
+    public User find(@PathVariable int id) {
+        log.info("Получен запрос GET /users/{}", id);
+
+        return userService.find(id);
+    }
+
+    @GetMapping("/{id}/friends")
+    public List<User> getFriends(@PathVariable int id) {
+        log.info("Получен запрос GET /users/{}/friends", id);
+
+        return userService.getFriends(id);
+    }
+
+    @PutMapping("/{id}/friends/{friendId}")
+    public void addFriend(@PathVariable int id, @PathVariable int friendId) {
+        log.info("Получен запрос GET /users/{}/friends/{}", id, friendId);
+
+        userService.addFriend(id, friendId);
+    }
+
+    @DeleteMapping("/{id}/friends/{friendId}")
+    public void removeFriend(@PathVariable int id, @PathVariable int friendId) {
+        log.info("Получен запрос GET /users/{}/friends/{}", id, friendId);
+
+        userService.removeFriend(id, friendId);
+    }
+
+    @GetMapping("/{id}/friends/common/{otherId}")
+    public List<User> getFriends(@PathVariable int id, @PathVariable int otherId) {
+        log.info("Получен запрос GET /users/{}/friends/common/{}", id, otherId);
+
+        return userService.getCommonFriends(id, otherId);
     }
 
     @PostMapping

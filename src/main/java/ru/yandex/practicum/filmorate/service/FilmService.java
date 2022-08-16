@@ -70,6 +70,10 @@ public class FilmService {
 
         Film film = find(filmId);
 
+        if (!film.getLikes().contains(userId)) {
+            throw new ResourceNotFoundException();
+        }
+
         film.removeLike(userId);
 
         return film;

@@ -81,8 +81,8 @@ public class UserService {
         User user = find(userId);
         User friend = find(friendId);
 
-        user.addFriend(friendId);
-        friend.addFriend(userId);
+        user.removeFriend(friendId);
+        friend.removeFriend(userId);
     }
 
     public List<User> getCommonFriends(int userId, int friendId) {
@@ -96,7 +96,7 @@ public class UserService {
 
         return getFriends(userId)
                 .stream()
-                .filter(u -> friend.getFriends().contains(u))
+                .filter(u -> friend.getFriends().contains(u.getId()))
                 .collect(Collectors.toList());
     }
 }

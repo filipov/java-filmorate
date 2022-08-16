@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.FilmService;
 
 import javax.validation.Valid;
@@ -29,6 +31,40 @@ public class FilmController {
         log.info("Получен запрос GET /films");
 
         return filmService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Film find(@PathVariable int id) {
+        log.info("Получен запрос GET /films/{}", id);
+
+        return filmService.find(id);
+    }
+
+    @PutMapping("/{id}/like/{userId}")
+    public Film addLike(@PathVariable int id, @PathVariable int userId) {
+        log.info("Получен запрос GET /films/{}/like/{}", id, userId);
+
+        return filmService.addLike(id, userId);
+    }
+
+    @DeleteMapping("/{id}/like/{userId}")
+    public Film removeLike(@PathVariable int id, @PathVariable int userId) {
+        log.info("Получен запрос GET /films/{}/like/{}", id, userId);
+
+        return filmService.removeLike(id, userId);
+    }
+
+    @GetMapping("/popular")
+    public List<Film> getMostPopular(@RequestParam Optional<Integer> count) {
+        log.info("Получен запрос GET /films/popular");
+
+        int defaultCount = 10;
+
+        if (count.isPresent()) {
+            defaultCount = count.get();
+        }
+
+        return filmService.mostPopular(defaultCount);
     }
 
     @PostMapping
