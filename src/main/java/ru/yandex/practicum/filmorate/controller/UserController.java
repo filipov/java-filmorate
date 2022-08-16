@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.ResourceNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.utils.Store;
+import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 @RestController()
 @RequestMapping("/users")
 public class UserController {
-    private final Store<User> users = new Store<>();
+    private final InMemoryUserStorage users = new InMemoryUserStorage();
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 

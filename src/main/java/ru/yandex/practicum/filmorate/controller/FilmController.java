@@ -8,14 +8,14 @@ import java.util.List;
 
 import ru.yandex.practicum.filmorate.exception.ResourceNotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.utils.Store;
+import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
 
 import javax.validation.Valid;
 
 @RestController()
 @RequestMapping("/films")
 public class FilmController {
-    private final Store<Film> films = new Store<>();
+    private final InMemoryFilmStorage films = new InMemoryFilmStorage();
 
     private static final Logger log = LoggerFactory.getLogger(FilmController.class);
 
