@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.model;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Set;
 
 import lombok.*;
 import ru.yandex.practicum.filmorate.utils.Model;
@@ -21,7 +22,7 @@ public class Film extends Model {
     @Positive
     private int duration;
 
-    final private HashSet<Integer> likes = new HashSet<>();
+    private final Set<Integer> likes = new HashSet<>();
 
     public Film(String name, String description, LocalDate releaseDate, int duration) {
         this.name = name;
