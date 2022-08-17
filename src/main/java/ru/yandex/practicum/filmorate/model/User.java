@@ -1,6 +1,8 @@
 package ru.yandex.practicum.filmorate.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import lombok.*;
 import ru.yandex.practicum.filmorate.utils.Model;
@@ -24,6 +26,8 @@ public class User extends Model {
     @Past
     private LocalDate birthday;
 
+    private final Set<Integer> friends = new HashSet<>();
+
     public User(int id, String email, String login, String name, LocalDate birthday) {
         setId(id);
 
@@ -37,5 +41,13 @@ public class User extends Model {
         }
 
         this.birthday = birthday;
+    }
+
+    public void addFriend(int id) {
+        friends.add(id);
+    }
+
+    public void removeFriend(int id) {
+        friends.remove(id);
     }
 }

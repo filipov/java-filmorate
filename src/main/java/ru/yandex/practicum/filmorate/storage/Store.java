@@ -1,13 +1,14 @@
-package ru.yandex.practicum.filmorate.utils;
+package ru.yandex.practicum.filmorate.storage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.yandex.practicum.filmorate.utils.Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Store<T extends Model> {
+public class Store<T extends Model> implements Storage<T>{
     private int lastId = 0;
 
     private final HashMap<Integer, T> state = new HashMap<>();
@@ -18,6 +19,14 @@ public class Store<T extends Model> {
         log.debug("Всего элементов: {}", state.values().size());
 
         return new ArrayList<>(state.values());
+    }
+
+    public T get(Integer id) {
+        T item = state.get(id);
+
+        log.debug("Найден элемент: {}", item);
+
+        return item;
     }
 
     public T add(T newItem) {
