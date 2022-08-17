@@ -10,7 +10,7 @@ import ru.yandex.practicum.filmorate.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController()
 @RequestMapping("/users")
@@ -83,5 +83,10 @@ public class UserController {
         }
 
         return updatedUser;
+    }
+
+    @ExceptionHandler
+    public Map<String, String> handleNegativeCount(final RuntimeException e) {
+        return Map.of("error", e.getMessage());
     }
 }

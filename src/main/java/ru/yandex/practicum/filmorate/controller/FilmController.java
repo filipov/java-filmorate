@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.FilmService;
 
 import javax.validation.Valid;
@@ -79,5 +79,10 @@ public class FilmController {
         log.info("Получен запрос PUT /films");
 
         return filmService.update(film);
+    }
+
+    @ExceptionHandler
+    public Map<String, String> handleNegativeCount(final RuntimeException e) {
+        return Map.of("error", e.getMessage());
     }
 }
